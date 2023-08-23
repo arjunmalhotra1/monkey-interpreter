@@ -175,8 +175,8 @@ func TestParsingPrefixExpressions(t *testing.T) {
 		integerValue int64
 	}{
 		// Both work
-		{input: "!5", operator: "!", integerValue: 5},
-		{"-15", "-", 15},
+		{input: "!5;", operator: "!", integerValue: 5},
+		{"-15;", "-", 15},
 	}
 
 	for _, tt := range prefixTests {
@@ -184,6 +184,9 @@ func TestParsingPrefixExpressions(t *testing.T) {
 		parser := New(l)
 		program := parser.ParseProgram()
 		checkParserErrors(t, parser)
+
+		// go test -run TestParsingPrefixExpressions
+		// fmt.Println("printing ", program.Statements)
 
 		if len(program.Statements) != 1 {
 			t.Fatalf("program.Statements does not contain %d statements. got=%d", 1, len(program.Statements))
@@ -237,7 +240,7 @@ func TestParsingInfixExpression(t *testing.T) {
 		{"5 * 5", 5, "*", 5},
 		{"5 / 5", 5, "/", 5},
 		{"5 > 5", 5, ">", 5},
-		{"5 < 5", 5, ">", 5},
+		{"5 < 5", 5, "<", 5},
 		{"5 == 5", 5, "==", 5},
 		{"5 != 5", 5, "!=", 5},
 	}
