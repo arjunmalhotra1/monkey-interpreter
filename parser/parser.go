@@ -286,5 +286,5 @@ func (p *Parser) parseInfixExpression(left ast.Expression) ast.Expression {
 }
 
 func (p *Parser) parseBoolean() ast.Expression {
-	return &ast.Boolean{Token: p.curToken, Value: p.curTokenIs(p.curToken.Type)}
+	return &ast.Boolean{Token: p.curToken, Value: p.curTokenIs(token.TRUE)}
 }
