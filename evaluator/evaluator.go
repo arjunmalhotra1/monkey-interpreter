@@ -1,6 +1,8 @@
 package evaluator
 
 import (
+	"fmt"
+
 	"github.com/arjunmalhotra1/monkey-interpreter/ast"
 
 	"github.com/arjunmalhotra1/monkey-interpreter/object"
@@ -46,6 +48,10 @@ func Eval(node ast.Node) object.Object {
 
 	case *ast.IfExpression:
 		return evalIfExpression(node)
+
+	case *ast.ReturnStatement:
+		val := Eval(node.ReturnValue)
+		return &object.ReturnValue{Value: val}
 	}
 
 	return nil
@@ -53,8 +59,13 @@ func Eval(node ast.Node) object.Object {
 
 func evalStatements(stmts []ast.Statement) object.Object {
 	var result object.Object
-	for _, statement := range stmts {
+
+	for i, statement := range stmts {
 		result = Eval(statement)
+		fmt.Printf("%d, %T, %+v %+v \n", i, result, result, statement)
+		if returnValue, ok := result.(*object.ReturnValue); ok {
+			return returnValue.Value
+		}
 	}
 	return result
 }
