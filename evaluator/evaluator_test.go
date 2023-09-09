@@ -60,21 +60,6 @@ func testIntegerObject(t *testing.T, obj object.Object, expected int64) bool {
 	return true
 }
 
-func testIntegerObject1(t *testing.T, obj object.Object, expected int64) bool {
-	result, ok := obj.(*object.ReturnValue)
-	if !ok {
-		t.Errorf("object is not Integer. got=%T (%+v)", obj, obj)
-		return false
-	}
-	result1, _ := result.Value.(*object.Integer)
-	if result1.Value != expected {
-		t.Errorf("object has wrong value. got=%d, want=%d", result.Value, expected)
-		return false
-	}
-
-	return true
-}
-
 func TestEvalBooleanExpression(t *testing.T) {
 	tests := []struct {
 		input    string
@@ -179,10 +164,10 @@ func TestReturnStatement(t *testing.T) {
 		input    string
 		expected int64
 	}{
-		// {"return 10;", 10},
-		// {"return 10; 9;", 10},
-		// {"return 2 * 5; 9;", 10},
-		// {"9; return 2 * 5; 9;", 10},
+		{"return 10;", 10},
+		{"return 10; 9;", 10},
+		{"return 2 * 5; 9;", 10},
+		{"9; return 2 * 5; 9;", 10},
 		{` if (10 > 1) {
   					if (100 > 10) {
     					return 101;
@@ -196,6 +181,6 @@ func TestReturnStatement(t *testing.T) {
 
 	for _, tt := range tests {
 		evaluated := testEval(tt.input)
-		testIntegerObject1(t, evaluated, tt.expected)
+		testIntegerObject(t, evaluated, tt.expected)
 	}
 }
