@@ -617,6 +617,7 @@ func TestFunctionParameterParsing(t *testing.T) {
 
 func TestCallExpressionParsing(t *testing.T) {
 	input := "add(1, 2 * 3 , 4 + 5)"
+	// input := "fn(x) {x;}(5)" // Here - fn(x) {x;} is the function in the call expression
 
 	l := lexer.New(input)
 	p := New(l)
