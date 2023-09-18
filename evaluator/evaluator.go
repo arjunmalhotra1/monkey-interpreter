@@ -82,6 +82,7 @@ func Eval(node ast.Node, env *object.Environment) object.Object {
 		return &object.Function{Parameters: params, Env: env, Body: body}
 
 	case *ast.CallExpression:
+		// fmt.Println("Call ", node.String())
 		function := Eval(node.Function, env)
 		if isError(function) {
 			return function
@@ -280,7 +281,6 @@ func applyFunction(fn object.Object, args []object.Object) object.Object {
 
 func extendFunctionEnv(fn *object.Function, args []object.Object) *object.Environment {
 	env := object.NewEnclosedEnvironment(fn.Env)
-
 	for paramIdx, param := range fn.Parameters {
 		env.Set(param.Value, args[paramIdx])
 	}
