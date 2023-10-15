@@ -1,5 +1,7 @@
 package object
 
+type BuiltinFunction func(args ...Object) Object
+
 type Environment struct {
 	store map[string]Object
 	outer *Environment
