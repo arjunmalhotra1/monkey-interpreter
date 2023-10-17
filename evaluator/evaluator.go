@@ -101,7 +101,6 @@ func Eval(node ast.Node, env *object.Environment) object.Object {
 }
 
 func evalIdentifier(node *ast.Identifier, env *object.Environment) object.Object {
-	fmt.Println("Inside evalIdentifier")
 	if val, ok := env.Get(node.Value); ok {
 		return val
 	}
