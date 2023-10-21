@@ -387,14 +387,14 @@ func TestBuiltinFunctions(t *testing.T) {
 		{`puts("hello", "world!")`, nil},
 		{`first([1, 2, 3])`, 1},
 		{`first([])`, nil},
-		{`first(1)`, "argument to `first` must be ARRAY, got INTEGER"},
+		{`first(1)`, "argument to `first` must be ARRAY, got=INTEGER"},
 		{`last([1, 2, 3])`, 3},
 		{`last([])`, nil},
-		{`last(1)`, "argument to `last` must be ARRAY, got INTEGER"},
+		{`last(1)`, "argument to `last` must be ARRAY, got=INTEGER"},
 		{`rest([1, 2, 3])`, []int{2, 3}},
 		{`rest([])`, nil},
 		{`push([], 1)`, []int{1}},
-		{`push(1, 1)`, "argument to `push` must be ARRAY, got INTEGER"},
+		{`push(1, 1)`, "argument to `push` must be ARRAY, got=INTEGER"},
 	}
 
 	for _, tt := range tests {
@@ -460,3 +460,9 @@ func TestArrayIndexExpressions(t *testing.T) {
 		}
 	}
 }
+
+// Map function on page 227
+// let map = fn(arr, f) { let iter = fn(arr, accumulated) { if(len(arr) == 0) { accumulated } else{ iter(rest(arr), push(accumulated, f(first(arr)))); } }; iter(arr,[]); };
+
+// Reduce function on page 228
+// let map = fn(arr, f) { let iter = fn(arr, accumulated) { if(len(arr) == 0) { accumulated } else{ iter(rest(arr), push(accumulated, f(first(arr)))); } }; iter(arr,[]); };
