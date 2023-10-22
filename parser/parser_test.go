@@ -921,7 +921,7 @@ func TestParsingHashLiteralsWithExpressions(t *testing.T) {
 			testInfixExpression(t, e, 0, "+", 1)
 		},
 		"two": func(e ast.Expression) {
-			testInfixExpression(t, e, 10, "-", 0)
+			testInfixExpression(t, e, 10, "-", 8)
 		},
 		"three": func(e ast.Expression) {
 			testInfixExpression(t, e, 15, "/", 5)
