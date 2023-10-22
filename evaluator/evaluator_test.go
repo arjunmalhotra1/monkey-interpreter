@@ -258,6 +258,9 @@ func TestErrorHandling(t *testing.T) {
 			`"Hello" - "World"`,
 			"unknown operator: STRING - STRING",
 		},
+		{
+			`{"name": "Monkey"}[fn(x) { x }];`, "unusable as hash key: FUNCTION",
+		},
 	}
 
 	for _, tt := range tests {
