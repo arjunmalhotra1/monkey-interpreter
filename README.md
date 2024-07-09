@@ -1,6 +1,6 @@
 # Monkey-Interpreter
 The purpose of this project was to learn `How to write an Interpreter in Go`.
-This is the part-1 of hands-on follow along book by Thorsten Ball.
+This is the part-1 of the book written by Thorsten Ball.
 
 Using Go programming language, I created an interpreter for a new language named `Monkey Programming Language`.
 
